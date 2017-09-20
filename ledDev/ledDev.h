@@ -22,6 +22,11 @@
 #include "stm32f1xx_hal.h"
 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 /* types ------------------------------------------------------------*/
 
 
@@ -53,9 +58,6 @@ typedef struct
 /* define -----------------------------------------------------------*/
 
 
-
-
-
 /* constants --------------------------------------------------------*/
 
 /* variables --------------------------------------------------------*/
@@ -66,6 +68,13 @@ typedef struct
 
 
 /* functions --------------------------------------------------------*/
+ledDev_err_t ledDev_regist(ledDev_t *p_ledDev,void *p_cookie);
+ledDev_err_t ledDev_getRegState(ledDev_t *p_ledDev);
+
+
+#ifdef __cplusplus
+}
+#endif
 
 
 #endif

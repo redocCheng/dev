@@ -21,8 +21,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_hal.h"
 
-/* types ------------------------------------------------------------*/
+#ifdef __cplusplus
+extern "C" {
+#endif
 
+
+/* types ------------------------------------------------------------*/
 
 typedef enum
 {
@@ -99,6 +103,12 @@ ledDrv_Err_Typedef bsp_led_Set(void *p_cookie,uint8_t state);
 ledDrv_Err_Typedef bsp_led_On(void *p_cookie);
 ledDrv_Err_Typedef bsp_led_Off(void *p_cookie);
 ledDrv_Err_Typedef bsp_led_Toggle(void *p_cookie);
+
+
+#ifdef __cplusplus
+}
+#endif
+
 
 #endif
 

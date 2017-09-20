@@ -28,9 +28,6 @@ typedef struct
 
 } ledDrv_info_t;
 
-
-
-
 /* Private define ------------------------------------------------------------*/
 /* Private constants ---------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -43,12 +40,7 @@ const GPIO_PinState GPIO_INIT[OUTPUTn] = {
 
     LED0_OUT_INIT,
     LED1_OUT_INIT,
-    LED_ALARM_OUT_INIT,
-    LED_READY_OUT_INIT,
-    LED_EXPOSURE_OUT_INIT,
-    LED_RELEASE_OUT_INIT,
 
-    BEEP_OUT_INIT,
 };
 
 /**
@@ -58,12 +50,7 @@ GPIO_TypeDef* GPIO_PORT[OUTPUTn] = {
 
     LED0_OUT_PORT,
     LED1_OUT_PORT,
-    LED_ALARM_OUT_PORT,
-    LED_READY_OUT_PORT,
-    LED_EXPOSURE_OUT_PORT,
-    LED_RELEASE_OUT_PORT,
 
-    BEEP_OUT_PORT,
 };
 
 /**
@@ -73,12 +60,7 @@ const uint16_t GPIO_PIN[OUTPUTn] = {
 
     LED0_OUT_PIN,
     LED1_OUT_PIN,
-    LED_ALARM_OUT_PIN,
-    LED_READY_OUT_PIN,
-    LED_EXPOSURE_OUT_PIN,
-    LED_RELEASE_OUT_PIN,
 
-    BEEP_OUT_PIN,
 };
 
 static const ledDrv_info_t g_ledDrv_info =
@@ -97,6 +79,8 @@ ledDrv_Err_Typedef bsp_led_Init(void *p_cookie)
     GPIO_InitTypeDef  gpioinitstruct = {0};
 
     ledDrv_ID_t g_ledDrv_id = (ledDrv_ID_t )*p_cookie;
+
+    LEDx_GPIO_CLK_ENABLE();
 
     if(g_ledDrv_id > OUTPUTn)
     {

@@ -26,7 +26,7 @@
 
 /* variables ---------------------------------------------------------*/
 const uint8_t projectTab[] = {"led"};                  /**<  项目名称   */
-const uint8_t versionsTab[] = {"V1.1.00alpha"};               /**<  版本信息   */
+const uint8_t versionsTab[] = {"V1.1.01alpha"};               /**<  版本信息   */
 const uint8_t userNameTab[] = {"redoc"};                     /**<  用户名     */
 
 ledDev_t led0;

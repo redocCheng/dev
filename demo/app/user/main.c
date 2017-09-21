@@ -14,7 +14,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "includes.h"
-
 #include "ledDev.h"
 
 
@@ -26,8 +25,8 @@
 
 /* variables ---------------------------------------------------------*/
 const uint8_t projectTab[] = {"led"};                  /**<  项目名称   */
-const uint8_t versionsTab[] = {"V1.1.01alpha"};               /**<  版本信息   */
-const uint8_t userNameTab[] = {"redoc"};                     /**<  用户名     */
+const uint8_t versionsTab[] = {"V1.1.01beta"};        /**<  版本信息   */
+const uint8_t userNameTab[] = {"redoc"};               /**<  用户名     */
 
 ledDev_t led0;
 ledDev_t led1;
@@ -46,13 +45,15 @@ uint8_t led_init(void)
 
     g_ledDrv_id = LED0_OUT;
 
-    if(EID_LED_DEV_NOERR != ledDev_regist(&led0,&g_ledDrv_id))
+    if(EID_LED_DEV_NOERR != ledDev_regist(&led0,g_ledDrv_id))
         return false;
 
     g_ledDrv_id = LED1_OUT;
 
-    if(EID_LED_DEV_NOERR != ledDev_regist(&led1,&g_ledDrv_id))
+    if(EID_LED_DEV_NOERR != ledDev_regist(&led1,g_ledDrv_id))
         return false;
+	
+	return true;
 }
 
 
@@ -75,11 +76,11 @@ int main(void)
 
     while (1)
     {
-        led0.g_ledDev_fun.ledDrv_on(&led0.p_cookie);
+        led0.p_ledDev_fun.ledDrv_on(led0.g_ledDrvID);
         HAL_Delay(1000);
-        led0.g_ledDev_fun.ledDrv_off(&led0.p_cookie);
+        led0.p_ledDev_fun.ledDrv_off(led0.g_ledDrvID);
         HAL_Delay(1000);
-        led1.g_ledDev_fun.ledDrv_toggle(&led1.p_cookie);
+        led1.p_ledDev_fun.ledDrv_toggle(led1.g_ledDrvID);
 
     }
 }

@@ -14,7 +14,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "ledDev.h"
-#include "ledDrv.h"
 
 
 
@@ -30,31 +29,31 @@
 /* Exported functions --------------------------------------------------------*/
 
 
-ledDev_err_t ledDev_regist(ledDev_t *p_ledDev,void *p_cookie)
+ledDev_err_t ledDev_regist(ledDev_t *p_ledDev,ledDrv_ID_t g_ledDrv_id)
 {
-    ledDrv_ID_t *p_ledDrv_id = (ledDrv_ID_t) *p_cookie;
-
-    if(EID_LED_DRV_NOERR != bsp_led_Init(p_ledDrv_id))
+    
+    if(EID_LED_DRV_NOERR != bsp_led_init(g_ledDrv_id))
         return EID_LED_DEV_PARAM;
 
-    bsp_led_Off(p_ledDrv_id);
+    bsp_led_off(g_ledDrv_id);
 
-    p_ledDev->p_cookie = p_ledDrv_id;
+	
+    p_ledDev->g_ledDrvID = g_ledDrv_id;
+	
+    p_ledDev->p_ledDev_fun.ledDrv_set = bsp_led_set;
+    p_ledDev->p_ledDev_fun.ledDrv_on = bsp_led_on;
+    p_ledDev->p_ledDev_fun.ledDrv_off = bsp_led_off;
+    p_ledDev->p_ledDev_fun.ledDrv_toggle = bsp_led_toggle;
 
-    p_ledDev->p_ledDev_fun.ledDrv_set = bsp_led_Set;
-    p_ledDev->p_ledDev_fun.ledDrv_on = bsp_led_On;
-    p_ledDev->p_ledDev_fun.ledDrv_off = bsp_led_Off;
-    p_ledDev->p_ledDev_fun.ledDrv_toggle = bsp_led_Toggle;
 
-
-    return EID_LED_DEV_NOERR;
+    return ledDev_getRegState(p_ledDev);
 }
 
 
 ledDev_err_t ledDev_getRegState(ledDev_t *p_ledDev)
 {
-    if(p_ledDev->p_cookie == NULL)
-        return EID_LED_DEV_REGIST;
+//    if(p_ledDev->p_cookie == NULL)
+//        return EID_LED_DEV_REGIST;
 
     if( p_ledDev->p_ledDev_fun.ledDrv_set == NULL)
         return EID_LED_DEV_REGIST;

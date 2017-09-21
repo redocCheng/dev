@@ -14,7 +14,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "ledDrv.h"
-
+#include "stdbool.h"
 
 
 /* Private typedef -----------------------------------------------------------*/
@@ -74,11 +74,9 @@ static const ledDrv_info_t g_ledDrv_info =
 /* Private functions ---------------------------------------------------------*/
 /* Exported functions --------------------------------------------------------*/
 
-ledDrv_Err_Typedef bsp_led_Init(void *p_cookie)
+ledDrv_err_t bsp_led_init(ledDrv_ID_t g_ledDrv_id)
 {
     GPIO_InitTypeDef  gpioinitstruct = {0};
-
-    ledDrv_ID_t g_ledDrv_id = (ledDrv_ID_t )*p_cookie;
 
     LEDx_GPIO_CLK_ENABLE();
 
@@ -92,18 +90,16 @@ ledDrv_Err_Typedef bsp_led_Init(void *p_cookie)
     gpioinitstruct.Pull   = GPIO_NOPULL;
     gpioinitstruct.Speed  = GPIO_SPEED_FREQ_HIGH;
 
-    if(HAL_OK == HAL_GPIO_Init(g_ledDrv_info.p_Ports[g_ledDrv_id], &gpioinitstruct))
-    {
-        return EID_LED_DRV_NOERR;
-    }
+    HAL_GPIO_Init(g_ledDrv_info.p_Ports[g_ledDrv_id], &gpioinitstruct);
 
 
+	return EID_LED_DRV_NOERR;
 }
 
 
-ledDrv_Err_Typedef bsp_led_Set(void *p_cookie,uint8_t state)
+ledDrv_err_t bsp_led_set(ledDrv_ID_t g_ledDrv_id,uint8_t state)
 {
-    ledDrv_ID_t g_ledDrv_id = (ledDrv_ID_t )*p_cookie;
+    
 
     if(g_ledDrv_id > OUTPUTn)
     {
@@ -118,19 +114,19 @@ ledDrv_Err_Typedef bsp_led_Set(void *p_cookie,uint8_t state)
 }
 
 
-ledDrv_Err_Typedef bsp_led_On(void *p_cookie)
+ledDrv_err_t bsp_led_on(ledDrv_ID_t g_ledDrv_id)
 {
-    return bsp_led_Set(true);
+    return bsp_led_set(g_ledDrv_id,true);
 }
 
-ledDrv_Err_Typedef bsp_led_Off(void *p_cookie)
+ledDrv_err_t bsp_led_off(ledDrv_ID_t g_ledDrv_id)
 {
-    return bsp_led_Set(false);
+    return bsp_led_set(g_ledDrv_id,false);
 }
 
-ledDrv_Err_Typedef bsp_led_Toggle(void *p_cookie)
+ledDrv_err_t bsp_led_toggle(ledDrv_ID_t g_ledDrv_id)
 {
-    ledDrv_ID_t g_ledDrv_id = (ledDrv_ID_t)*p_cookie;
+   
 
     if(g_ledDrv_id > OUTPUTn)
     {

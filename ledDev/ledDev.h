@@ -15,11 +15,11 @@
 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __LED_DRV_H
-#define __LED_DRV_H
+#ifndef __LED_DEV_H
+#define __LED_DEV_H
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f1xx_hal.h"
+#include "ledDrv.h"
 
 
 #ifdef __cplusplus
@@ -40,18 +40,17 @@ typedef enum
 
 typedef struct
 {
-    ledDrv_Err_Typedef (*ledDrv_set)      (void *p_cookie, uint8_t state);
-    ledDrv_Err_Typedef (*ledDrv_on)       (void *p_cookie);
-    ledDrv_Err_Typedef (*ledDrv_off)      (void *p_cookie);
-    ledDrv_Err_Typedef (*ledDrv_toggle)   (void *p_cookie);
+    ledDrv_err_t (*ledDrv_set)      (ledDrv_ID_t g_ledDrv_id, uint8_t state);
+    ledDrv_err_t (*ledDrv_on)       (ledDrv_ID_t g_ledDrv_id);
+    ledDrv_err_t (*ledDrv_off)      (ledDrv_ID_t g_ledDrv_id);
+    ledDrv_err_t (*ledDrv_toggle)   (ledDrv_ID_t g_ledDrv_id);
 
 } ledDev_fun_t;
 
 typedef struct
 {
-    ledDev_fun_t g_ledDev_fun;
-    void *p_cookie;
-
+    ledDev_fun_t p_ledDev_fun;
+	ledDrv_ID_t g_ledDrvID;
 }ledDev_t;
 
 
@@ -68,7 +67,7 @@ typedef struct
 
 
 /* functions --------------------------------------------------------*/
-ledDev_err_t ledDev_regist(ledDev_t *p_ledDev,void *p_cookie);
+ledDev_err_t ledDev_regist(ledDev_t *p_ledDev,ledDrv_ID_t g_ledDrv_id);
 ledDev_err_t ledDev_getRegState(ledDev_t *p_ledDev);
 
 

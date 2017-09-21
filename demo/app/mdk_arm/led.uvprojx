@@ -47,7 +47,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>ioout</OutputName>
+          <OutputName>led</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -84,6 +84,8 @@
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
+            <nStopA1X>0</nStopA1X>
+            <nStopA2X>0</nStopA2X>
           </AfterMake>
           <SelectedForBatchBuild>0</SelectedForBatchBuild>
           <SVCSIdString></SVCSIdString>
@@ -147,7 +149,7 @@
             <RestoreSysVw>1</RestoreSysVw>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>1</TargetSelection>
+          <TargetSelection>6</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
@@ -161,7 +163,7 @@
             <PeripheralDll></PeripheralDll>
             <PeripheralDllArguments></PeripheralDllArguments>
             <InitializationFile></InitializationFile>
-            <Driver>BIN\UL2CM3.DLL</Driver>
+            <Driver>Segger\JL2CM3.dll</Driver>
           </TargetDlls>
         </DebugOption>
         <Utilities>
@@ -361,11 +363,13 @@
             <uSurpInc>0</uSurpInc>
             <uC99>0</uC99>
             <useXO>0</useXO>
+            <v6Lang>0</v6Lang>
+            <v6LangP>0</v6LangP>
             <VariousControls>
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103x6</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Drivers\STM32F1xx_HAL_Driver\Inc;..\..\Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;..\..\Drivers/CMSIS/Include;..\..\Drivers\CMSIS\Device\ST\STM32F1xx\Include;..\user;..\hardware;..\..\..\ioout</IncludePath>
+              <IncludePath>..\..\Drivers\STM32F1xx_HAL_Driver\Inc;..\..\Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;..\..\Drivers/CMSIS/Include;..\..\Drivers\CMSIS\Device\ST\STM32F1xx\Include;..\user;..\hardware;..\..\..\ledDev</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -486,12 +490,27 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>ioout</GroupName>
+          <GroupName>ledDev</GroupName>
           <Files>
             <File>
-              <FileName>ioout.c</FileName>
+              <FileName>ledDev.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\ioout\ioout.c</FilePath>
+              <FilePath>..\..\..\ledDev\ledDev.c</FilePath>
+            </File>
+            <File>
+              <FileName>ledDrv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\ledDev\ledDrv.c</FilePath>
+            </File>
+            <File>
+              <FileName>ledDev.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\ledDev\ledDev.h</FilePath>
+            </File>
+            <File>
+              <FileName>ledDrv.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\ledDev\ledDrv.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -512,23 +531,6 @@
         </Group>
         <Group>
           <GroupName>hardware</GroupName>
-          <Files>
-            <File>
-              <FileName>bsp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\hardware\bsp.c</FilePath>
-            </File>
-            <File>
-              <FileName>gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\hardware\gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>tim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\hardware\tim.c</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>::CMSIS</GroupName>

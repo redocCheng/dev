@@ -21,6 +21,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_hal.h"
 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -33,7 +34,7 @@ typedef enum
     EID_LED_DRV_PARAM = -1,
     EID_LED_DRV_NOERR = 0,
 
-}ledDrv_Err_Typedef;
+}ledDrv_err_t;
 
 
 typedef enum
@@ -42,7 +43,6 @@ typedef enum
     LED1_OUT,
 
     LED_MAX_OUT,
-
 }ledDrv_ID_t;
 
 /* define -----------------------------------------------------------*/
@@ -98,11 +98,11 @@ typedef enum
 
 
 /* functions --------------------------------------------------------*/
-ledDrv_Err_Typedef bsp_led_init(void *p_cookie);
-ledDrv_Err_Typedef bsp_led_Set(void *p_cookie,uint8_t state);
-ledDrv_Err_Typedef bsp_led_On(void *p_cookie);
-ledDrv_Err_Typedef bsp_led_Off(void *p_cookie);
-ledDrv_Err_Typedef bsp_led_Toggle(void *p_cookie);
+ledDrv_err_t bsp_led_init(ledDrv_ID_t g_ledDrv_id);
+ledDrv_err_t bsp_led_set(ledDrv_ID_t g_ledDrv_id,uint8_t state);
+ledDrv_err_t bsp_led_on(ledDrv_ID_t g_ledDrv_id);
+ledDrv_err_t bsp_led_off(ledDrv_ID_t g_ledDrv_id);
+ledDrv_err_t bsp_led_toggle(ledDrv_ID_t g_ledDrv_id);
 
 
 #ifdef __cplusplus

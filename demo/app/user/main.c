@@ -52,7 +52,7 @@ uint8_t led_init(void)
 
     if(EID_LED_DEV_NOERR != ledDev_regist(&led1,g_ledDrv_id))
         return false;
-	
+
 	return true;
 }
 
@@ -76,11 +76,11 @@ int main(void)
 
     while (1)
     {
-        led0.p_ledDev_fun.ledDrv_on(led0.g_ledDrvID);
+        led0.p_ledDev_fun.led_on(led0.g_ledDrvID);
         HAL_Delay(1000);
-        led0.p_ledDev_fun.ledDrv_off(led0.g_ledDrvID);
+        led0.p_ledDev_fun.led_off(led0.g_ledDrvID);
         HAL_Delay(1000);
-        led1.p_ledDev_fun.ledDrv_toggle(led1.g_ledDrvID);
+        led1.p_ledDev_fun.led_toggle(led1.g_ledDrvID);
 
     }
 }

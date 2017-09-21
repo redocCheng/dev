@@ -99,7 +99,7 @@ ledDrv_err_t bsp_led_init(ledDrv_ID_t g_ledDrv_id)
 
 ledDrv_err_t bsp_led_set(ledDrv_ID_t g_ledDrv_id,uint8_t state)
 {
-    
+
 
     if(g_ledDrv_id > OUTPUTn)
     {
@@ -126,7 +126,7 @@ ledDrv_err_t bsp_led_off(ledDrv_ID_t g_ledDrv_id)
 
 ledDrv_err_t bsp_led_toggle(ledDrv_ID_t g_ledDrv_id)
 {
-   
+
 
     if(g_ledDrv_id > OUTPUTn)
     {

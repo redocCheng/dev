@@ -40,10 +40,10 @@ typedef enum
 
 typedef struct
 {
-    ledDrv_err_t (*ledDrv_set)      (ledDrv_ID_t g_ledDrv_id, uint8_t state);
-    ledDrv_err_t (*ledDrv_on)       (ledDrv_ID_t g_ledDrv_id);
-    ledDrv_err_t (*ledDrv_off)      (ledDrv_ID_t g_ledDrv_id);
-    ledDrv_err_t (*ledDrv_toggle)   (ledDrv_ID_t g_ledDrv_id);
+    ledDrv_err_t (*led_set)      (ledDrv_ID_t g_ledDrv_id, uint8_t state);
+    ledDrv_err_t (*led_on)       (ledDrv_ID_t g_ledDrv_id);
+    ledDrv_err_t (*led_off)      (ledDrv_ID_t g_ledDrv_id);
+    ledDrv_err_t (*led_toggle)   (ledDrv_ID_t g_ledDrv_id);
 
 } ledDev_fun_t;
 

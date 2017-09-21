@@ -25,19 +25,17 @@
 
 /* variables ---------------------------------------------------------*/
 const uint8_t projectTab[] = {"led"};                  /**<  项目名称   */
-const uint8_t versionsTab[] = {"V1.1.01beta"};        /**<  版本信息   */
+const uint8_t versionsTab[] = {"V1.1.03beta"};        /**<  版本信息   */
 const uint8_t userNameTab[] = {"redoc"};               /**<  用户名     */
 
 ledDev_t led0;
 ledDev_t led1;
-
 
 /* function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 
 
 /* functions ---------------------------------------------------------*/
-
 
 uint8_t led_init(void)
 {

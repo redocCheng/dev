@@ -31,7 +31,6 @@
 
 ledDev_err_t ledDev_regist(ledDev_t *p_ledDev,ledDrv_ID_t g_ledDrv_id)
 {
-
     if(EID_LED_DRV_NOERR != bsp_led_init(g_ledDrv_id))
         return EID_LED_DEV_PARAM;
 
@@ -41,6 +40,7 @@ ledDev_err_t ledDev_regist(ledDev_t *p_ledDev,ledDrv_ID_t g_ledDrv_id)
     p_ledDev->g_ledDrvID = g_ledDrv_id;
 
     p_ledDev->p_ledDev_fun.led_set = bsp_led_set;
+    p_ledDev->p_ledDev_fun.led_get = bsp_led_get;
     p_ledDev->p_ledDev_fun.led_on = bsp_led_on;
     p_ledDev->p_ledDev_fun.led_off = bsp_led_off;
     p_ledDev->p_ledDev_fun.led_toggle = bsp_led_toggle;
@@ -56,6 +56,9 @@ ledDev_err_t ledDev_getRegState(ledDev_t *p_ledDev)
 //        return EID_LED_DEV_REGIST;
 
     if( p_ledDev->p_ledDev_fun.led_set == NULL)
+        return EID_LED_DEV_REGIST;
+
+    if( p_ledDev->p_ledDev_fun.led_get == NULL)
         return EID_LED_DEV_REGIST;
 
     if(p_ledDev->p_ledDev_fun.le_on == NULL)

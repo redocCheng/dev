@@ -89,18 +89,13 @@ ledDrv_err_t bsp_led_init(ledDrv_ID_t g_ledDrv_id)
     gpioinitstruct.Mode   = GPIO_MODE_OUTPUT_PP;
     gpioinitstruct.Pull   = GPIO_NOPULL;
     gpioinitstruct.Speed  = GPIO_SPEED_FREQ_HIGH;
-
     HAL_GPIO_Init(g_ledDrv_info.p_Ports[g_ledDrv_id], &gpioinitstruct);
-
 
 	return EID_LED_DRV_NOERR;
 }
 
-
 ledDrv_err_t bsp_led_set(ledDrv_ID_t g_ledDrv_id,uint8_t state)
 {
-
-
     if(g_ledDrv_id > OUTPUTn)
     {
        return EID_LED_DRV_PARAM;
@@ -113,6 +108,29 @@ ledDrv_err_t bsp_led_set(ledDrv_ID_t g_ledDrv_id,uint8_t state)
     return EID_LED_DRV_NOERR;
 }
 
+ledDrv_err_t bsp_led_get(ledDrv_ID_t g_ledDrv_id,GPIO_PinState *status)
+{
+    GPIO_PinState bitstatus;
+
+    if(g_ledDrv_id > OUTPUTn)
+    {
+       return EID_LED_DRV_PARAM;
+    }
+
+    if ((g_ledDrv_info.p_Ports[g_ledDrv_id]->IDR & g_ledDrv_info.p_pins[g_ledDrv_id]) != (uint32_t)GPIO_PIN_RESET)
+    {
+        bitstatus = GPIO_PIN_SET;
+    }
+    else
+    {
+        bitstatus = GPIO_PIN_RESET;
+    }
+
+    *state = ( bitstatus == g_ledDrv_info.p_inits[g_ledDrv_id] ) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+
+
+    return EID_LED_DRV_NOERR;
+}
 
 ledDrv_err_t bsp_led_on(ledDrv_ID_t g_ledDrv_id)
 {
@@ -126,8 +144,6 @@ ledDrv_err_t bsp_led_off(ledDrv_ID_t g_ledDrv_id)
 
 ledDrv_err_t bsp_led_toggle(ledDrv_ID_t g_ledDrv_id)
 {
-
-
     if(g_ledDrv_id > OUTPUTn)
     {
        return EID_LED_DRV_PARAM;
@@ -138,14 +154,6 @@ ledDrv_err_t bsp_led_toggle(ledDrv_ID_t g_ledDrv_id)
 
     return EID_LED_DRV_NOERR;
 }
-
-
-
-
-
-
-
-
 
 
 

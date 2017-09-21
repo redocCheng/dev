@@ -12,8 +12,6 @@
   * @remark
   */
 
-
-
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __LED_DRV_H
 #define __LED_DRV_H
@@ -28,14 +26,12 @@ extern "C" {
 
 
 /* types ------------------------------------------------------------*/
-
 typedef enum
 {
     EID_LED_DRV_PARAM = -1,
     EID_LED_DRV_NOERR = 0,
 
 }ledDrv_err_t;
-
 
 typedef enum
 {
@@ -51,9 +47,6 @@ typedef enum
   * @brief 输出口个数
   */
 #define OUTPUTn                           LED_MAX_OUT
-
-
-
 
 
 /**
@@ -89,17 +82,12 @@ typedef enum
 
 
 /* constants --------------------------------------------------------*/
-
 /* variables --------------------------------------------------------*/
-
-
 /* macro ------------------------------------------------------------*/
-
-
-
 /* functions --------------------------------------------------------*/
 ledDrv_err_t bsp_led_init(ledDrv_ID_t g_ledDrv_id);
 ledDrv_err_t bsp_led_set(ledDrv_ID_t g_ledDrv_id,uint8_t state);
+ledDrv_err_t bsp_led_get(ledDrv_ID_t g_ledDrv_id,GPIO_PinState *status);
 ledDrv_err_t bsp_led_on(ledDrv_ID_t g_ledDrv_id);
 ledDrv_err_t bsp_led_off(ledDrv_ID_t g_ledDrv_id);
 ledDrv_err_t bsp_led_toggle(ledDrv_ID_t g_ledDrv_id);
@@ -111,11 +99,4 @@ ledDrv_err_t bsp_led_toggle(ledDrv_ID_t g_ledDrv_id);
 
 
 #endif
-
-
-
-
-
-
-
 

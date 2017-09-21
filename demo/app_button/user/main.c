@@ -29,6 +29,11 @@ const uint8_t versionsTab[] = {"V1.1.01beta"};        /**<  版本信息   */
 const uint8_t userNameTab[] = {"redoc"};               /**<  用户名     */
 
 
+ledDev_t led0;
+ledDev_t led1;
+buttonDev_t button0;
+
+
 typedef struct
 {
     uint8_t (*process)(void);
@@ -36,9 +41,9 @@ typedef struct
 
 typedef struct
 {
-    ledDev_t led0;
-    ledDev_t led1;
-    buttonDev_t button0;
+    ledDev_t *led0;
+    ledDev_t *led1;
+    buttonDev_t *button0;
     testDev_fun_t g_testDev_fun;
 }testDev_t;
 
@@ -52,44 +57,66 @@ static void SystemClock_Config(void);
 
 /* functions ---------------------------------------------------------*/
 
-
-uint8_t testDev_regist(testDev_t *p_testDev)
+uint8_t led_init(void)
 {
-    if(EID_LED_DEV_NOERR != ledDev_regist(&testDev1.led0,LED0_OUT))
+    if(EID_LED_DEV_NOERR != ledDev_regist(&led0,LED0_OUT))
     {
         return false;
     }
 
-   if(EID_LED_DEV_NOERR != ledDev_regist(&testDev1.led1,LED1_OUT))
-   {
+    if(EID_LED_DEV_NOERR != ledDev_regist(&led1,LED1_OUT))
+    {
         return false;
-   }
+    }
 
+    return true;
+}
+
+uint8_t button_init(void)
+{
     if(EID_BUTTON_DEV_NOERR != buttonDev_regist(&button0,KEY_EXPOUSE_IN))
     {
         return false;
     }
+
+    return true;
+}
+
+uint8_t testDev_regist(testDev_t *p_testDev)
+{
+    if(EID_LED_DEV_REGIST == ledDev_getRegState(&led0))
+        return false;
+
+    if(EID_LED_DEV_REGIST == ledDev_getRegState(&led1))
+        return false;
+
+    if(EID_LED_DEV_REGIST == buttonDev_getRegState(&button0))
+        return false;
+
+    p_testDev->led0 = &led0;
+    p_testDev->led1 = &led1;
+    p_testDev->button0 = &button0;
 
     p_testDev->g_testDev_fun = testDev_Process;
 
     return true;
 }
 
-uint8_t testDev_Process(void)
+uint8_t testDev_Process(testDev_t *p_testDev)
 {
     uint8_t state;
 
-    if(EID_BUTTON_DEV_NOERR == testDev1.button0.g_buttonDev_fun.button_get(&testDev1.button0,&state))
+    if(EID_BUTTON_DEV_NOERR == p_testDev->button0->g_buttonDev_fun.button_get(p_testDev->button0,&state))
     {
         if(state)
         {
-            testDev1.led0.g_ledDev_fun.led_on(&testDev1.led0);
-            testDev1.led1.g_ledDev_fun.led_on(&testDev1.led1);
+            p_testDev->led0.g_ledDev_fun.led_on(p_testDev->led0);
+            p_testDev->led0.g_ledDev_fun.led_on(p_testDev->led0);
         }
         else
         {
-            testDev1.led0.g_ledDev_fun.led_off(&testDev1.led0);
-            testDev1.led1.g_ledDev_fun.led_off(&testDev1.led1);
+            p_testDev->led0->g_ledDev_fun.led_off(p_testDev->led0);
+            p_testDev->led0->g_ledDev_fun.led_off(p_testDev->led0);
         }
     }
 
@@ -107,6 +134,8 @@ int main(void)
 
     DISABLE_INT();
 
+    led_init();
+    button_init();
     testDev_regist(&testDev1);
 
     ENABLE_INT();
@@ -114,7 +143,7 @@ int main(void)
     while (1)
     {
 
-        testDev1.g_testDev_fun.process();
+        testDev1.g_testDev_fun.process(&testDev1);
 
     }
 }

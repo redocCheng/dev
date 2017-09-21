@@ -39,11 +39,11 @@ ledDev_err_t ledDev_regist(ledDev_t *p_ledDev,ledDrv_ID_t g_ledDrv_id)
 
     p_ledDev->g_ledDrvID = g_ledDrv_id;
 
-    p_ledDev->p_ledDev_fun.led_set = bsp_led_set;
-    p_ledDev->p_ledDev_fun.led_get = bsp_led_get;
-    p_ledDev->p_ledDev_fun.led_on = bsp_led_on;
-    p_ledDev->p_ledDev_fun.led_off = bsp_led_off;
-    p_ledDev->p_ledDev_fun.led_toggle = bsp_led_toggle;
+    p_ledDev->g_ledDev_fun.led_set = bsp_led_set;
+    p_ledDev->g_ledDev_fun.led_get = bsp_led_get;
+    p_ledDev->g_ledDev_fun.led_on = bsp_led_on;
+    p_ledDev->g_ledDev_fun.led_off = bsp_led_off;
+    p_ledDev->g_ledDev_fun.led_toggle = bsp_led_toggle;
 
 
     return ledDev_getRegState(p_ledDev);
@@ -55,19 +55,19 @@ ledDev_err_t ledDev_getRegState(ledDev_t *p_ledDev)
 //    if(p_ledDev->p_cookie == NULL)
 //        return EID_LED_DEV_REGIST;
 
-    if( p_ledDev->p_ledDev_fun.led_set == NULL)
+    if( p_ledDev->g_ledDev_fun.led_set == NULL)
         return EID_LED_DEV_REGIST;
 
-    if( p_ledDev->p_ledDev_fun.led_get == NULL)
+    if( p_ledDev->g_ledDev_fun.led_get == NULL)
         return EID_LED_DEV_REGIST;
 
-    if(p_ledDev->p_ledDev_fun.le_on == NULL)
+    if(p_ledDev->g_ledDev_fun.le_on == NULL)
         return EID_LED_DEV_REGIST;
 
-    if(p_ledDev->p_ledDev_fun.led_off == NULL)
+    if(p_ledDev->g_ledDev_fun.led_off == NULL)
         return EID_LED_DEV_REGIST;
 
-    if(p_ledDev->p_ledDev_fun.led_toggle == NULL)
+    if(p_ledDev->g_ledDev_fun.led_toggle == NULL)
         return EID_LED_DEV_REGIST;
 
     return EID_LED_DEV_NOERR;

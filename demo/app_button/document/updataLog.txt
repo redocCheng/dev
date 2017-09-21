@@ -1,0 +1,27 @@
+
+   @file       updateLog.txt
+   @brief      更新日志
+   @author     redoc
+   @version    v1.0
+   @date       2017-09-20
+
+   @note
+   [2017-09-20] redoc V1.0
+   初始版本
+
+   @remark
+
+
+
+[2017-09-20] redoc (V1.1.00alpha)
+1.新建LED驱动工程，未测试
+
+[2017-09-20] redoc (V1.1.01alpha)
+1.修正部分.h文件
+
+[2017-09-20] redoc (V1.1.01beta)
+1.调试通过
+
+[2017-09-20] redoc (V1.1.02beta)
+1.优化buttonDev驱动函数名称
+

@@ -1,5 +1,5 @@
 /**
-  * @file       ledDev.h
+  * @file       buttonDev.h
   * @brief      输出初始化头文件
   * @author     redoc
   * @version    v1.0
@@ -15,11 +15,11 @@
 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __LED_DEV_H
-#define __LED_DEV_H
+#ifndef __BUTTON_DEV_H
+#define __BUTTON_DEV_H
 
 /* Includes ------------------------------------------------------------------*/
-#include "ledDrv.h"
+#include "buttonDrv.h"
 
 
 #ifdef __cplusplus
@@ -32,27 +32,23 @@ extern "C" {
 
 typedef enum
 {
-    EID_LED_DEV_REGIST = -2,
-    EID_LED_DEV_PARAM = -1,
-    EID_LED_DEV_NOERR = 0,
+    EID_BUTTON_DEV_REGIST = -2,
+    EID_BUTTON_DEV_PARAM = -1,
+    EID_BUTTON_DEV_NOERR = 0,
 
-}ledDev_err_t;
-
-typedef struct
-{
-    ledDrv_err_t (*led_set)      (ledDrv_ID_t g_ledDrv_id, uint8_t state);
-    ledDrv_err_t (*led_get)      (ledDrv_ID_t g_ledDrv_id, GPIO_PinState *status);
-    ledDrv_err_t (*led_on)       (ledDrv_ID_t g_ledDrv_id);
-    ledDrv_err_t (*led_off)      (ledDrv_ID_t g_ledDrv_id);
-    ledDrv_err_t (*led_toggle)   (ledDrv_ID_t g_ledDrv_id);
-
-} ledDev_fun_t;
+}buttonDev_err_t;
 
 typedef struct
 {
-    ledDev_fun_t g_ledDev_fun;
-	ledDrv_ID_t g_ledDrvID;
-}ledDev_t;
+    buttonDrv_err_t (*button_get)(buttonDrv_ID_t g_buttonDrv_id,GPIO_PinState *status);
+
+} buttonDev_fun_t;
+
+typedef struct
+{
+    buttonDev_fun_t g_buttonDev_fun;
+	buttonDrv_ID_t g_buttonDrvID;
+}buttonDev_t;
 
 
 /* define -----------------------------------------------------------*/
@@ -68,8 +64,8 @@ typedef struct
 
 
 /* functions --------------------------------------------------------*/
-ledDev_err_t ledDev_regist(ledDev_t *p_ledDev,ledDrv_ID_t g_ledDrv_id);
-ledDev_err_t ledDev_getRegState(ledDev_t *p_ledDev);
+buttonDev_err_t buttonDev_regist(buttonDev_t *p_buttonDev,buttonDrv_ID_t g_buttonDrv_id);
+buttonDev_err_t buttonDev_getRegState(buttonDev_t *p_buttonDev);
 
 
 #ifdef __cplusplus

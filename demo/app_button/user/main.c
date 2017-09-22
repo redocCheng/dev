@@ -18,6 +18,22 @@
 #include "ledDev.h"
 
 /* typedef -----------------------------------------------------------*/
+
+typedef struct
+{
+    uint8_t (*process) (void *testDev);
+    
+}testDev_fun_t;
+
+typedef struct
+{
+    ledDev_t *p_led0;
+    ledDev_t *p_led1;
+    buttonDev_t *p_button0;
+    testDev_fun_t g_testDev_fun;
+    
+}testDev_t;
+
 /* define ------------------------------------------------------------*/
 /* macro -------------------------------------------------------------*/
 #define ENABLE_INT()	__ASM volatile("cpsie i")           /* 使能全局中断 */
@@ -29,24 +45,10 @@ const uint8_t versionsTab[] = {"V1.1.03beta"};        /**<  版本信息   */
 const uint8_t userNameTab[] = {"redoc"};               /**<  用户名     */
 
 
+
 ledDev_t led0;
 ledDev_t led1;
 buttonDev_t button0;
-
-
-typedef struct
-{
-    uint8_t (*process) (void *testDev);
-}testDev_fun_t;
-
-typedef struct
-{
-    ledDev_t *p_led0;
-    ledDev_t *p_led1;
-    buttonDev_t *p_button0;
-    testDev_fun_t g_testDev_fun;
-}testDev_t;
-
 testDev_t testDev1;
 
 
@@ -102,7 +104,7 @@ uint8_t testDev_process(void *testDev)
         }
     }
 
-	return true;
+    return true;
 }
 
 uint8_t testDev_regist(testDev_t *p_testDev)

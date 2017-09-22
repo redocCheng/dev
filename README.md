@@ -1,6 +1,7 @@
 # dev
 
-driver for hardware.
+> driver for hardware.
+
 
 ##使用方法
 
@@ -15,7 +16,7 @@ ledDev_t led0;
 ```
 if(EID_LED_NOERR != ledDev_regist(&led0,LED0_OUT))
 {
-  return false;
+    return false;
 }
 ```
 > LED0_OUT是led驱动端口号

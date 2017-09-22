@@ -1,5 +1,5 @@
 # dev
->  新的驱动函数思路，参考linux驱动，[rt-thread](https://github.com/RT-Thread/rt-thread)驱动的一些想法，当然他们的驱动都采用init、write、read、ctrl的模式，和周立功的《面向AMetal框架与接口的编程（上）》，还参考了[cube的一个帖子](http://www.stm32cube.com/question/458)，认为这样的便于扩展，同样的业务代码量增加不少，但感觉这样会有利于维护和可移植性。写这个希望获得一些建议和意见。
+>  一点驱动函数的思路，参考linux驱动，[rt-thread](https://github.com/RT-Thread/rt-thread)驱动的一些想法，当然他们的驱动都采用init、write、read、ctrl的模式，和周立功的《面向AMetal框架与接口的编程（上）》，还参考了[cube的一个帖子](http://www.stm32cube.com/question/458)，认为这样的便于扩展，同样的业务代码量增加不少，但感觉这样会有利于维护和可移植性。写这个希望获得一些建议和意见。
 
 ## 一、ledDev
 led驱动。

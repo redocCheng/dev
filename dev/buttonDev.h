@@ -35,8 +35,8 @@ extern "C" {
   */
 typedef enum
 {
-    KEY_EXPOUSE_IN=0,       //曝光按键
-    KEY_RELEASE_IN,         //一键释放按键
+    BUTTON0_IN=0,       
+    BUTTON1_IN,         
 
     BUTTON_ID_MAX,
 
@@ -60,6 +60,7 @@ typedef struct
 {
     buttonDev_fun_t g_buttonDev_fun;
     buttonDev_id_t g_buttonDev_id;
+    
 }buttonDev_t;
 
 /* Exported constants --------------------------------------------------------*/

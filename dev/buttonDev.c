@@ -38,20 +38,20 @@ typedef struct
 
 
 /**
-  * @brief  KEY_EXPOUSE_IN     曝光按键
+  * @brief  BUTTON0_IN     
   */
-#define KEY_EXPOUSE_IN_PIN              GPIO_PIN_6
-#define KEY_EXPOUSE_IN_PORT             GPIOB
-#define KEY_EXPOUSE_IN_PULL             GPIO_PULLUP
-#define KEY_EXPOUSE_IN_INIT             GPIO_PIN_RESET
+#define BUTTON0_IN_PIN              GPIO_PIN_6
+#define BUTTON0_IN_PORT             GPIOB
+#define BUTTON0_IN_PULL             GPIO_PULLUP
+#define BUTTON0_IN_INIT             GPIO_PIN_RESET
 
 /**
-  * @brief  KEY_RELEASE_IN     一键释放
+  * @brief  BUTTON1_IN     
   */
-#define KEY_RELEASE_IN_PIN              GPIO_PIN_7
-#define KEY_RELEASE_IN_PORT             GPIOB
-#define KEY_RELEASE_IN_PULL             GPIO_PULLUP
-#define KEY_RELEASE_IN_INIT             GPIO_PIN_RESET
+#define BUTTON1_IN_PIN              GPIO_PIN_7
+#define BUTTON1_IN_PORT             GPIOB
+#define BUTTON1_IN_PULL             GPIO_PULLUP
+#define BUTTON1_IN_INIT             GPIO_PIN_RESET
 
 /**
   * @brief 输入时钟使能
@@ -68,28 +68,28 @@ typedef struct
 
 GPIO_TypeDef* BUTTON_PORT[INPUTn]  =
 {
-    KEY_EXPOUSE_IN_PORT,
-    KEY_RELEASE_IN_PORT,
+    BUTTON0_IN_PORT,
+    BUTTON1_IN_PORT,
 };
 
 
 GPIO_PinState BUTTON_INIT[INPUTn]  =
 {
-    KEY_EXPOUSE_IN_INIT,
-    KEY_RELEASE_IN_INIT,
+    BUTTON0_IN_INIT,
+    BUTTON1_IN_INIT,
 };
 
 
 uint16_t BUTTON_PULL[INPUTn]  =
 {
-    KEY_EXPOUSE_IN_PULL,
-    KEY_RELEASE_IN_PULL,
+    BUTTON0_IN_PULL,
+    BUTTON1_IN_PULL,
 };
 
 uint16_t BUTTON_PIN[INPUTn]  =
 {
-    KEY_EXPOUSE_IN_PIN,
-    KEY_RELEASE_IN_PIN,
+    BUTTON0_IN_PIN,
+    BUTTON1_IN_PIN,
 };
 
 

@@ -76,7 +76,7 @@ uint8_t led_init(void)
 
 uint8_t button_init(void)
 {
-    if(EID_BUTTON_NOERR != buttonDev_regist(&button0,KEY_EXPOUSE_IN))
+    if(EID_BUTTON_NOERR != buttonDev_regist(&button0,BUTTON0_IN))
     {
         return false;
     }

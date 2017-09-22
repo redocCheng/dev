@@ -121,7 +121,7 @@ static ledDev_err_t bsp_led_init(void *ledDev)
     gpioinitstruct.Speed  = GPIO_SPEED_FREQ_HIGH;
     HAL_GPIO_Init(g_ledDev_info.p_Ports[p_ledDev->g_ledDev_id], &gpioinitstruct);
 
-	return EID_LED_NOERR;
+    return EID_LED_NOERR;
 }
 
 static ledDev_err_t bsp_led_set(void *ledDev,uint8_t state)

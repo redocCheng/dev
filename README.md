@@ -1,12 +1,17 @@
 # dev
-> driver for hardware.
+
+driver for hardware.
+
 ##使用方法
+
 **1.定义句柄**
 ```
 ledDev_t led0; 
 
 ```
+
 **2.注册句柄**	
+
 ```
 if(EID_LED_NOERR != ledDev_regist(&led0,LED0_OUT))
 {

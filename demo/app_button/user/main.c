@@ -35,14 +35,14 @@ typedef struct
 }testDev_t;
 
 /* define ------------------------------------------------------------*/
-/* macro -------------------------------------------------------------*/
 #define ENABLE_INT()	__ASM volatile("cpsie i")           /* 使能全局中断 */
 #define DISABLE_INT()	__ASM volatile("cpsid i")           /* 禁止全局中断 */
 
+/* macro -------------------------------------------------------------*/
 /* variables ---------------------------------------------------------*/
-const uint8_t projectTab[] = {"button"};                  /**<  项目名称   */
-const uint8_t versionsTab[] = {"V1.1.03beta"};        /**<  版本信息   */
-const uint8_t userNameTab[] = {"redoc"};               /**<  用户名     */
+const uint8_t projectTab[] = {"button"};                /**<  项目名称   */
+const uint8_t versionsTab[] = {"V1.1.03beta"};          /**<  版本信息   */
+const uint8_t userNameTab[] = {"redoc"};                /**<  用户名     */
 
 
 

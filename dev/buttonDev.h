@@ -3,10 +3,10 @@
   * @brief      输出初始化头文件
   * @author     redoc
   * @version    v1.0
-  * @date       2016-08-20
+  * @date       2017-09-20
   *
   * @note
-  * [2016-08-20] <redoc> v1.0
+  * [2017-09-20] <redoc> v1.0
   * 初始版本
   *
   * @remark

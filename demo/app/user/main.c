@@ -14,8 +14,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "includes.h"
-#include "buttonDev.h"
 #include "ledDev.h"
+
 
 /* typedef -----------------------------------------------------------*/
 /* define ------------------------------------------------------------*/
@@ -24,31 +24,12 @@
 #define DISABLE_INT()	__ASM volatile("cpsid i")           /* 禁止全局中断 */
 
 /* variables ---------------------------------------------------------*/
-const uint8_t projectTab[] = {"button"};                  /**<  项目名称   */
-const uint8_t versionsTab[] = {"V1.1.03beta"};        /**<  版本信息   */
+const uint8_t projectTab[] = {"led"};                  /**<  项目名称   */
+const uint8_t versionsTab[] = {"V1.1.01beta"};        /**<  版本信息   */
 const uint8_t userNameTab[] = {"redoc"};               /**<  用户名     */
-
 
 ledDev_t led0;
 ledDev_t led1;
-buttonDev_t button0;
-
-
-typedef struct
-{
-    uint8_t (*process) (void *testDev);
-}testDev_fun_t;
-
-typedef struct
-{
-    ledDev_t *p_led0;
-    ledDev_t *p_led1;
-    buttonDev_t *p_button0;
-    testDev_fun_t g_testDev_fun;
-}testDev_t;
-
-testDev_t testDev1;
-
 
 
 /* function prototypes -----------------------------------------------*/
@@ -57,71 +38,22 @@ static void SystemClock_Config(void);
 
 /* functions ---------------------------------------------------------*/
 
+
 uint8_t led_init(void)
 {
-    if(EID_LED_NOERR != ledDev_regist(&led0,LED0_OUT))
-    {
+    ledDrv_ID_t   g_ledDrv_id;
+
+    g_ledDrv_id = LED0_OUT;
+
+    if(EID_LED_DEV_NOERR != ledDev_regist(&led0,g_ledDrv_id))
         return false;
-    }
 
-    if(EID_LED_NOERR != ledDev_regist(&led1,LED1_OUT))
-    {
+    g_ledDrv_id = LED1_OUT;
+
+    if(EID_LED_DEV_NOERR != ledDev_regist(&led1,g_ledDrv_id))
         return false;
-    }
-
-    return true;
-}
-
-uint8_t button_init(void)
-{
-    if(EID_BUTTON_NOERR != buttonDev_regist(&button0,KEY_EXPOUSE_IN))
-    {
-        return false;
-    }
-
-    return true;
-}
-
-uint8_t testDev_process(void *testDev)
-{
-    GPIO_PinState state;
-	testDev_t *p_testDev = (testDev_t *)testDev;
-
-
-    if(EID_BUTTON_NOERR == p_testDev->p_button0->g_buttonDev_fun.button_get(p_testDev->p_button0,&state))
-    {
-        if(state)
-        {
-            p_testDev->p_led0->g_ledDev_fun.led_on(p_testDev->p_led0);
-            p_testDev->p_led1->g_ledDev_fun.led_off(p_testDev->p_led1);
-        }
-        else
-        {
-            p_testDev->p_led0->g_ledDev_fun.led_off(p_testDev->p_led0);
-            p_testDev->p_led1->g_ledDev_fun.led_on(p_testDev->p_led1);
-        }
-    }
-
+	
 	return true;
-}
-
-uint8_t testDev_regist(testDev_t *p_testDev)
-{
-    if(EID_LED_REGIST == ledDev_getRegState(&led0))
-        return false;
-
-    if(EID_LED_REGIST == ledDev_getRegState(&led1))
-        return false;
-
-    if(EID_BUTTON_REGIST == buttonDev_getRegState(&button0))
-        return false;
-
-    p_testDev->p_led0 = &led0;
-    p_testDev->p_led1 = &led1;
-    p_testDev->p_button0 = &button0;
-	p_testDev->g_testDev_fun.process = testDev_process;
-
-    return true;
 }
 
 
@@ -139,15 +71,16 @@ int main(void)
     DISABLE_INT();
 
     led_init();
-    button_init();
-    testDev_regist(&testDev1);
 
     ENABLE_INT();
 
     while (1)
     {
-
-        testDev1.g_testDev_fun.process(&testDev1);
+        led0.p_ledDev_fun.ledDrv_on(led0.g_ledDrvID);
+        HAL_Delay(1000);
+        led0.p_ledDev_fun.ledDrv_off(led0.g_ledDrvID);
+        HAL_Delay(1000);
+        led1.p_ledDev_fun.ledDrv_toggle(led1.g_ledDrvID);
 
     }
 }

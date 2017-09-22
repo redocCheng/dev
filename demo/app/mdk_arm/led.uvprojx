@@ -369,7 +369,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103x6</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Drivers\STM32F1xx_HAL_Driver\Inc;..\..\Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;..\..\Drivers/CMSIS/Include;..\..\Drivers\CMSIS\Device\ST\STM32F1xx\Include;..\user;..\hardware;..\..\..\dev</IncludePath>
+              <IncludePath>..\..\Drivers\STM32F1xx_HAL_Driver\Inc;..\..\Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;..\..\Drivers/CMSIS/Include;..\..\Drivers\CMSIS\Device\ST\STM32F1xx\Include;..\user;..\hardware;..\..\..\ledDev</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -490,17 +490,27 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>dev</GroupName>
+          <GroupName>ledDev</GroupName>
           <Files>
-            <File>
-              <FileName>buttonDev.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\dev\buttonDev.c</FilePath>
-            </File>
             <File>
               <FileName>ledDev.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\dev\ledDev.c</FilePath>
+              <FilePath>..\..\..\ledDev\ledDev.c</FilePath>
+            </File>
+            <File>
+              <FileName>ledDrv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\ledDev\ledDrv.c</FilePath>
+            </File>
+            <File>
+              <FileName>ledDev.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\ledDev\ledDev.h</FilePath>
+            </File>
+            <File>
+              <FileName>ledDrv.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\ledDev\ledDrv.h</FilePath>
             </File>
           </Files>
         </Group>

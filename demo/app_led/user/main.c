@@ -39,16 +39,10 @@ static void SystemClock_Config(void);
 
 uint8_t led_init(void)
 {
-    ledDrv_ID_t   g_ledDrv_id;
-
-    g_ledDrv_id = LED0_OUT;
-
-    if(EID_LED_DEV_NOERR != ledDev_regist(&led0,g_ledDrv_id))
+    if(EID_LED_NOERR != ledDev_regist(&led0,LED0_OUT))
         return false;
 
-    g_ledDrv_id = LED1_OUT;
-
-    if(EID_LED_DEV_NOERR != ledDev_regist(&led1,g_ledDrv_id))
+    if(EID_LED_NOERR != ledDev_regist(&led1,LED1_OUT))
         return false;
 
 	return true;
@@ -74,11 +68,11 @@ int main(void)
 
     while (1)
     {
-        led0.p_ledDev_fun.led_on(led0.g_ledDrvID);
+        led0.g_ledDev_fun.led_on(&led0);
         HAL_Delay(1000);
-        led0.p_ledDev_fun.led_off(led0.g_ledDrvID);
+        led0.g_ledDev_fun.led_off(&led0);
         HAL_Delay(1000);
-        led1.p_ledDev_fun.led_toggle(led1.g_ledDrvID);
+        led1.g_ledDev_fun.led_toggle(&led1);
 
     }
 }

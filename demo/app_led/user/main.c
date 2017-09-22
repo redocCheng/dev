@@ -45,7 +45,7 @@ uint8_t led_init(void)
     if(EID_LED_NOERR != ledDev_regist(&led1,LED1_OUT))
         return false;
 
-	return true;
+    return true;
 }
 
 

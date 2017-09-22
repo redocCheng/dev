@@ -115,17 +115,17 @@ static buttonDev_err_t bsp_button_init(void *buttonDev)
 
     BUTTONx_GPIO_CLK_ENABLE();
 
-    if(p_buttonDev->g_buttonDevID > INPUTn)
+    if(p_buttonDev->g_buttonDev_id > INPUTn)
     {
         return EID_BUTTON_PARAM;
     }
 
-    gpioinitstruct.Pin    = g_buttonDev_info.p_pins[p_buttonDev->g_buttonDevID];
-    gpioinitstruct.Pull   = g_buttonDev_info.p_pulls[p_buttonDev->g_buttonDevID];
+    gpioinitstruct.Pin    = g_buttonDev_info.p_pins[p_buttonDev->g_buttonDev_id];
+    gpioinitstruct.Pull   = g_buttonDev_info.p_pulls[p_buttonDev->g_buttonDev_id];
     gpioinitstruct.Mode   = GPIO_MODE_INPUT;
     gpioinitstruct.Speed  = GPIO_SPEED_FREQ_MEDIUM;
 
-    HAL_GPIO_Init(g_buttonDev_info.p_Ports[p_buttonDev->g_buttonDevID], &gpioinitstruct);
+    HAL_GPIO_Init(g_buttonDev_info.p_Ports[p_buttonDev->g_buttonDev_id], &gpioinitstruct);
 
 	return EID_BUTTON_NOERR;
 }
@@ -136,14 +136,14 @@ static buttonDev_err_t bsp_button_get(void *buttonDev,uint8_t *status)
     GPIO_PinState bitstatus;
 	buttonDev_t *p_buttonDev = (buttonDev_t *)buttonDev;
 
-    if(p_buttonDev->g_buttonDevID > INPUTn)
+    if(p_buttonDev->g_buttonDev_id > INPUTn)
     {
        return EID_BUTTON_PARAM;
     }
 
-    bitstatus = HAL_GPIO_ReadPin(g_buttonDev_info.p_Ports[p_buttonDev->g_buttonDevID],g_buttonDev_info.p_pins[p_buttonDev->g_buttonDevID]);
+    bitstatus = HAL_GPIO_ReadPin(g_buttonDev_info.p_Ports[p_buttonDev->g_buttonDev_id],g_buttonDev_info.p_pins[p_buttonDev->g_buttonDev_id]);
 
-    *status = ( (bitstatus == g_buttonDev_info.p_inits[p_buttonDev->g_buttonDevID] ) ? true : false );
+    *status = ( (bitstatus == g_buttonDev_info.p_inits[p_buttonDev->g_buttonDev_id] ) ? true : false );
 
     return EID_BUTTON_NOERR;
 }
@@ -151,27 +151,27 @@ static buttonDev_err_t bsp_button_get(void *buttonDev,uint8_t *status)
 
 /* Exported functions --------------------------------------------------------*/
 
-
 buttonDev_err_t buttonDev_regist(buttonDev_t *p_buttonDev,buttonDev_id_t g_buttonDev_id)
 {
-    p_buttonDev->g_buttonDevID = g_buttonDev_id;
+    p_buttonDev->g_buttonDev_id = g_buttonDev_id;
     p_buttonDev->g_buttonDev_fun.button_get = bsp_button_get;
 
-	if(EID_BUTTON_NOERR != bsp_button_init(p_buttonDev))
+    if(EID_BUTTON_NOERR != bsp_button_init(p_buttonDev))
+    {
         return EID_BUTTON_PARAM;
-
-
+    }
+    
     return buttonDev_getRegState(p_buttonDev);
 }
 
 
 buttonDev_err_t buttonDev_getRegState(buttonDev_t *p_buttonDev)
 {
-
     if( p_buttonDev->g_buttonDev_fun.button_get == NULL)
+    {
         return EID_BUTTON_REGIST;
-
-
+    }
+        
     return EID_BUTTON_NOERR;
 }
 

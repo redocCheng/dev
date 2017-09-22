@@ -85,7 +85,7 @@ uint8_t button_init(void)
 uint8_t testDev_process(void *testDev)
 {
     GPIO_PinState state;
-	testDev_t *p_testDev = (testDev_t *)testDev;
+    testDev_t *p_testDev = (testDev_t *)testDev;
 
 
     if(EID_BUTTON_NOERR == p_testDev->p_button0->g_buttonDev_fun.button_get(p_testDev->p_button0,&state))
@@ -119,7 +119,7 @@ uint8_t testDev_regist(testDev_t *p_testDev)
     p_testDev->p_led0 = &led0;
     p_testDev->p_led1 = &led1;
     p_testDev->p_button0 = &button0;
-	p_testDev->g_testDev_fun.process = testDev_process;
+    p_testDev->g_testDev_fun.process = testDev_process;
 
     return true;
 }

@@ -59,7 +59,7 @@ typedef struct
 typedef struct
 {
     buttonDev_fun_t g_buttonDev_fun;
-	buttonDev_id_t g_buttonDevID;
+    buttonDev_id_t g_buttonDev_id;
 }buttonDev_t;
 
 /* Exported constants --------------------------------------------------------*/

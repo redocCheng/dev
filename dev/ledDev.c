@@ -106,7 +106,7 @@ static ledDev_err_t bsp_led_toggle(void *ledDev);
 static ledDev_err_t bsp_led_init(void *ledDev)
 {
     GPIO_InitTypeDef  gpioinitstruct = {0};
-	ledDev_t *p_ledDev = (ledDev_t *)ledDev;
+    ledDev_t *p_ledDev = (ledDev_t *)ledDev;
 
     LEDx_GPIO_CLK_ENABLE();
 
@@ -126,7 +126,7 @@ static ledDev_err_t bsp_led_init(void *ledDev)
 
 static ledDev_err_t bsp_led_set(void *ledDev,uint8_t state)
 {
-	ledDev_t *p_ledDev = (ledDev_t *)ledDev;
+    ledDev_t *p_ledDev = (ledDev_t *)ledDev;
 
     if(p_ledDev->g_ledDev_id > OUTPUTn)
     {
@@ -143,7 +143,7 @@ static ledDev_err_t bsp_led_set(void *ledDev,uint8_t state)
 static ledDev_err_t bsp_led_get(void *ledDev,uint8_t *status)
 {
     GPIO_PinState bitstatus;
-	ledDev_t *p_ledDev = (ledDev_t *)ledDev;
+    ledDev_t *p_ledDev = (ledDev_t *)ledDev;
 
     if(p_ledDev->g_ledDev_id > OUTPUTn)
     {
@@ -177,7 +177,7 @@ static ledDev_err_t bsp_led_off(void *ledDev)
 
 static ledDev_err_t bsp_led_toggle(void *ledDev)
 {
-	ledDev_t *p_ledDev = (ledDev_t *)ledDev;
+    ledDev_t *p_ledDev = (ledDev_t *)ledDev;
 
     if(p_ledDev->g_ledDev_id > OUTPUTn)
     {
@@ -194,43 +194,49 @@ static ledDev_err_t bsp_led_toggle(void *ledDev)
 
 ledDev_err_t ledDev_getRegState(ledDev_t *p_ledDev)
 {
-//    if(p_ledDev->p_cookie == NULL)
-//        return EID_LED_REGIST;
-
     if( p_ledDev->g_ledDev_fun.led_set == NULL)
+    {
         return EID_LED_REGIST;
+    }
 
     if( p_ledDev->g_ledDev_fun.led_get == NULL)
+    {
         return EID_LED_REGIST;
+    }
 
     if(p_ledDev->g_ledDev_fun.led_on == NULL)
+    {
         return EID_LED_REGIST;
+    }
 
     if(p_ledDev->g_ledDev_fun.led_off == NULL)
+    {
         return EID_LED_REGIST;
+    }
 
     if(p_ledDev->g_ledDev_fun.led_toggle == NULL)
+    {
         return EID_LED_REGIST;
+    }
 
     return EID_LED_NOERR;
 }
 
 ledDev_err_t ledDev_regist(ledDev_t *p_ledDev,ledDev_id_t g_ledDev_id)
 {
-
     p_ledDev->g_ledDev_id = g_ledDev_id;
-
     p_ledDev->g_ledDev_fun.led_set = bsp_led_set;
     p_ledDev->g_ledDev_fun.led_get = bsp_led_get;
     p_ledDev->g_ledDev_fun.led_on = bsp_led_on;
     p_ledDev->g_ledDev_fun.led_off = bsp_led_off;
     p_ledDev->g_ledDev_fun.led_toggle = bsp_led_toggle;
 
-	if(EID_LED_NOERR != bsp_led_init(p_ledDev))
+    if(EID_LED_NOERR != bsp_led_init(p_ledDev))
+    {
         return EID_LED_PARAM;
-
+    }
+    
     bsp_led_off(p_ledDev);
-
 
     return ledDev_getRegState(p_ledDev);
 }

@@ -59,7 +59,7 @@ typedef struct
 typedef struct
 {
     ledDev_fun_t g_ledDev_fun;
-	ledDev_id_t g_ledDev_id;
+    ledDev_id_t g_ledDev_id;
 
 }ledDev_t;
 
